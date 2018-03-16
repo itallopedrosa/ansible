@@ -1,0 +1,132 @@
+#!/bin/bash
+###############################################################################
+#                                                                             #
+# PROGRAMA : check_disk_mount                                                 #
+# VERSÃO   : 1.0                                                              #
+# FUNCAO   : Verifica espaço em disco de todos filesystem montados nos        #
+# servidores linux e traz o resultado em uma única linha. ATENÇÃO - Para esse #
+# check funcionar corretamente, é necessário que o NRPE esteja recompilado com#
+# a opção de buffers acima de 4k. Aplique o patch nrpe_multiline no NRPE se   #
+# desejar utilizar esse plugin.                                               #
+# AUTOR    : Christiano Mendonça                                              #
+# LICENÇA  : GPL 2                                                            #
+# --------------------------------------------------------------------------- #
+#                                                                             #
+# HISTORICO:                                                                  #
+#                                                                             #
+#  VERSAO   DATA         INFO                                   AUTOR         #
+#  -------  ------------ --------------                         -------       #
+#                                                                             #
+#  1.0      07.05.2010 - Versão final produção                  cmendon       #
+#                                                                             #
+###############################################################################
+
+PVER="1.0"
+PNAME=`basename $0`
+export PATH=/sbin:/bin:/usr/sbin:/usr/bin
+
+if [ `arch` = "x86_64" ]; then
+        LIBEXEC=/usr/lib64/nagios/plugins
+else
+        LIBEXEC=/usr/lib/nagios/plugins
+fi
+
+
+ajuda()
+
+{
+  printf "
+  $PNAME  Versão $PVER  (C) 2010 - Central IT Tecnologia
+  
+  Sintaxe: $PNAME <Warning> <Critical>
+   
+        OPÇÕES:   <Warning>      : Valor inteiro de porcentagem livre para warning em MB. Ex. 10.
+                  <Critical>     : Valor inteiro de porcentagem para livre critical. Ex. 5.
+                  -? | -h        : Ajuda
+                  -v             : Imprime versão
+
+  "
+  exit 0
+}
+
+case "$1" in
+  
+       -h | --help)
+ 
+           ajuda
+
+        ;;
+
+        -v | --version)
+        
+		echo
+		echo "$PNAME  Versão $PVER  (C) 2010 - Central IT Tecnologia da Informação"
+		echo
+		echo "Script distribuído junto do pacote nagios-plugins"
+		echo
+		exit 0
+        ;;
+
+        *)
+		[ ! -e "$LIBEXEC/check_disk" ] && echo "O arquivo check_disk não foi encontrado no caminho $LIBEXEC" && exit 2
+		
+		if [ "$1" == "" ] || [ "$2" == "" ] ; then
+                	ajuda
+            	fi
+            
+		[ $2 -gt $1 ] && echo "O threshold WARNING deve ser maior que CRITICAL" && exit 2
+            
+		W=$1
+		C=$2	
+		
+		# ========
+		# BEGIN
+		# =======
+
+		for fs in `egrep "^/dev/" /etc/mtab | grep -v cache | awk '{print $1}'`; do
+
+		   $LIBEXEC/check_disk -w$W% -c$C% $fs | grep WARNING && STATUS1="1"
+
+		done
+		
+                for fs in `egrep "^/dev/" /etc/mtab | grep -v cache | awk '{print $1}'`; do
+
+                   $LIBEXEC/check_disk -w$W% -c$C% $fs | grep CRITICAL && STATUS2="2"
+
+                done
+
+                for fs in `egrep "^/dev/" /etc/mtab | grep -v cache | awk '{print $1}'`; do
+
+                   $LIBEXEC/check_disk -w$W% -c$C% $fs | grep OK && STATUS0="0"
+
+                done
+		
+		perf="|"
+
+		for fs in `egrep "^/dev/" /etc/mtab |  grep -v cache | awk '{print $1}'`; do
+
+		   perf="${perf} $($LIBEXEC/check_disk -w$W% -c$C% $fs | cut -d\| -f2 | sed 's:/::');"
+		
+                done
+	
+		echo $perf
+
+		if [ "$STATUS2" == "2" ]
+		then
+		    exit 2
+		fi
+
+		if [ "$STATUS1" == "1" ]
+                then
+                    exit 1
+                fi      
+
+                if [ "$STATUS0" == "0" ]
+                then
+                    exit 0
+
+		else
+		    exit 3	
+                fi
+
+esac

@@ -1,0 +1,15 @@
+---
+- hosts: web-servers
+  tasks:
+    - name: Instalando Pacote Nrpe Client
+      yum: pkg=nrpe state=latest
+    - name: Copiando o arquivo de configuração Nrpe e Diretorio de Plugins
+      copy: src=/static_files/nrpe.cfg dest=/etc/nagios/nrpe.cfg owner=nagios group=nagios mode=644 backup=yes
+    - name: Copiando o arquivo de configuração Nrpe e Diretorio de Plugins
+      copy: src=/static_files/plugins dest=/usr/lib64/nagios/ owner=nagios group=nagios mode=0755
+    - name: verificando status do Nrpe
+      service: name=nrpe state=started enabled=yes
+
+#  handlers:
+#    - name: restart nrpe
+#      service: name=nrpe state=restarted
