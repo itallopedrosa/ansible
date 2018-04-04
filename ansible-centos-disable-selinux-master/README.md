@@ -1,7 +1,6 @@
 Centos disable SELinux
 =========
 
-License
--------
+Para executar o playbook:
 
-MIT
+ansible-playbook selinux.yml
