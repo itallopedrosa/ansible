@@ -1,18 +1,14 @@
-Standalone Tomcat Deployment
-Requires Ansible 1.2 or newer
-Expects CentOS/RHEL 6.x hosts
-These playbooks deploy a very basic implementation of Tomcat Application Server, version 7. To use them, first edit the "hosts" inventory file to contain the hostnames of the machines on which you want Tomcat deployed, and edit the group_vars/tomcat-servers file to set any Tomcat configuration parameters you need.
+## Implantação autônoma do Tomcat
 
-Then run the playbook, like this:
+- Requer Ansible 1.2 ou mais recente
+- Espera hosts do CentOS / RHEL 6.x
+
+Estes playbooks implementam uma implementação muito básica do Tomcat Application Server,
+versão 7. Para usá-los, primeiro edite o arquivo de inventário "hosts" para conter o
+hostnames das máquinas nas quais você deseja que o Tomcat seja implantado e edite o
+arquivo group_vars / tomcat-servers para definir qualquer parâmetro de configuração do Tomcat que você precisa.
+
+Em seguida, execute o playbook com o comando abaixo, assim:
+
 
 ansible-playbook -i hosts site.yml
-When the playbook run completes, you should be able to see the Tomcat Application Server running on the ports you chose, on the target machines.
-
-This is a very simple playbook and could serve as a starting point for more complex Tomcat-based projects.
-
-Ideas for Improvement
-Here are some ideas for ways that these playbooks could be extended:
-
-Write a playbook to deploy an actual application into the server.
-Deploy Tomcat clustered with a load balancer in front.
-We would love to see contributions and improvements, so please fork this repository on GitHub and send us your changes via pull requests.
