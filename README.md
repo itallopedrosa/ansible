@@ -1,6 +1,6 @@
 
-Ansible Examples
+Exempolos Ansible
 ----------------
 
-This repository contains examples and best practices for building Ansible Playbooks.
+Este repositório contém exemplos e melhores práticas para a criação de Playbooks Ansible.
 
