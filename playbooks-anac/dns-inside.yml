@@ -1,0 +1,12 @@
+# Install and configure snmpd
+
+---
+
+- hosts: web-servers
+  gather_facts: yes
+  vars:
+  tasks:
+
+  - name: Copiando arquivo resolv.conf
+    copy: src=/static_files/resolv-inside.conf dest=/etc/resolv.conf owner=root group=root mode=644 backup=yes
+

@@ -1,0 +1,14 @@
+---
+- hosts: web-servers
+  tasks:
+    - name: instalando o apache com a ultima versao disponivel.
+      yum: pkg=httpd state=latest
+    - name: substituindo o arquivo padrao  index.html.
+      copy: src=/static_files/index.html dest=/var/www/html/ mode=0644
+      notify: restart apache
+    - name: verificando status do apache  (and enable it at boot)
+      service: name=httpd state=started enabled=yes
+
+  handlers:
+    - name: restart apache
+      service: name=httpd state=restarted

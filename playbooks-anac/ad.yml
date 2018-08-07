@@ -1,0 +1,18 @@
+---
+## This playbook installs and configures AD authentication
+
+- name: Configuracao Autenticacao AD.
+  hosts: web-servers  
+  become: yes
+  become_method: sudo
+
+  tasks:
+    - name: Instalacao de pacotes necessario para autenticao no AD
+      yum: 
+        name: libselinux-python,realmd,sssd,oddjob,oddjob-mkhomedir,adcli,samba-common,samba-common-tools,ntpdate,ntp,python-pip,samba-winbind,samba-winbind-clients
+        state: latest
+
+    - name: Copiando arquivo de configuracao smb.conf
+      copy: src=/static_files/smb.conf dest=/etc/samba/smb.conf owner=root group=root mode=644 backup=yes
+
+

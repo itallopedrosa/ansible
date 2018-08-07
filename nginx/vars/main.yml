@@ -1,0 +1,4 @@
+---
+# vars file for nginx
+# Variáveis que poderão ser utilizadas por qualquer tarefa do nginx
+ username: nginusr
