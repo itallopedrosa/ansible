@@ -1,6 +1,6 @@
 ## WildFly JBoss Deploy
 
-- Requer Ansible 1.2 or newer
+- Requer Ansible no minimo a versão 1.2
 - CentOS/RHEL 6 ou 7.
 
 
