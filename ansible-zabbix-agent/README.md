@@ -1,15 +1,15 @@
-Ansible role: Zabbix 3.x on CentOS 7.x
+Ansible role: Instalação Zabbix Agent 3.x CentOS 7.x
 =========
 
-An Ansible role that installs Zabbix agent 3.x on Centos 7.x
+Role Ansible para instalação do agente do Zabbix 3.x no Centos 7.x
 
 
-Role Variables
+Variaveis:
 --------------
 
-See the file `default\main.yml`
+No arquivo `default\main.yml`
 
-License
+Licença
 -------
 
 BSD
