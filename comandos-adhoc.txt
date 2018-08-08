@@ -1,0 +1,33 @@
+Comando Ad-Hoc
+
+ansible all -m shell -a "mkdir /root/wordpress"
+
+ansible all -m get_url -a "url=https://br.wordpress.org/wordpress-4.9-pt_BR.tar.gz dest=/root/wordpress"
+
+ansible web -m get_url -a "url=https://br.wordpress.org/wordpress-4.9-pt_BR.tar.gz dest=/root/wordpress"
+
+ansible all -m shell -a "cat /etc/resolv.conf"
+
+ansible all -m shell -a "cat /etc/resolv.conf"
+
+ansible all -m shell -a "systemctl disable firewalld"
+
+ansible web -m yum -a "name=htop update_cache=true"
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+:
+---------------------------------------------------------------------------------
+Servidores Curso Ansible
+
+Ansible Server - 192.168.15.10 -ansible-server
+
+Web Server - 192.168.15.11 - web-01
+
+Db Server - 192.168.15.12 - db-01
+
+
+
+
