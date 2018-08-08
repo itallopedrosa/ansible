@@ -14,20 +14,6 @@ ansible all -m shell -a "systemctl disable firewalld"
 
 ansible web -m yum -a "name=htop update_cache=true"
 
----------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-:
----------------------------------------------------------------------------------
-Servidores Curso Ansible
-
-Ansible Server - 192.168.15.10 -ansible-server
-
-Web Server - 192.168.15.11 - web-01
-
-Db Server - 192.168.15.12 - db-01
-
 
 
 
