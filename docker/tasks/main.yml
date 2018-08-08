@@ -1,0 +1,26 @@
+---
+  - name: Instalando Docker CentOS 7
+    yum: name={{ item }} state=installed
+    with_items:
+      - yum-utils
+      - device-mapper-persistent-data
+      - lvm2
+    tags: General_Packages
+  
+
+  - name: Configurando Repositorio Docker-CE
+    get_url:
+            url: https://download.docker.com/linux/centos/docker-ce.repo
+            dest: /etc/yum.repos.d/docker-ce.repo
+            mode: 0644
+
+  - name: Instalando Docker CE
+    yum:
+            name: docker-ce
+            state: present
+
+  - name: Iniciando e Habilitando o Serviço do Docker
+    service:
+            name: docker
+            state: started
+            enabled: yes    
