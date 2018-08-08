@@ -1,0 +1,9 @@
+[db_hosts]
+vm-centos7
+
+[mw_hosts]
+vm-centos7
+
+[all:children]
+db_hosts
+mw_hosts
