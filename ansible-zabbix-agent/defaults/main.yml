@@ -1,0 +1,55 @@
+---
+# Adjust these parameters
+
+zabbix_agent_hostname:                                     # Unique, case sensitive hostname. Required for active checks and must match hostname as configured on the server.
+zabbix_server_passive: "10.121.50.54"                      # List of comma delimited IP addresses (or hostnames) of Zabbix servers
+zabbix_server_active: "10.121.50.54"                                      # List of comma delimited IP:port (or hostname:port) pairs of Zabbix servers for active checks
+                                                           # If port is not specified, default port is used
+
+# General parameters
+zabbix_agent_pid: "/var/run/zabbix/zabbix_agentd.pid"      # Location of agent PID file
+zabbix_agent_log: "/var/log/zabbix/zabbix_agentd.log"      # Location of agent log file
+zabbix_agent_logsize: 0                                    # Log File Size In MB ( 0 - disable automatic log rotation )
+zabbix_agent_debug: 3                                      # Debug Level (0 - basic, 1 - critical, 2 - error, 3 - warnings, 4 - debug, 5 - extended dubug )
+zabbix_agent_sourceip:                                     # Source IP address for outgoing connections
+zabbix_agent_remote: 0                                     # Whether remote commands from Zabbix server are allowed ( 0 - not allowed, 1 - allowed)
+zabbix_agent_logremote: 0                                  # Enable logging of executed shell commands as warnings
+zabbix_agent_port: 10050                                   # Agent will listen on this port for connections from the server
+zabbix_agent_listenip: "0.0.0.0"                           # List of comma delimited IP addresses that the agent should listen on
+zabbix_agent_startagents: 3                                # Number of pre-forked instances of zabbix_agentd that process passive checks
+zabbix_agent_hostmeta:                                     # Optional parameter that defines host metadata
+zabbix_agent_hostmetaitem: "system.uname"                                # Optional parameter that defines an item used for getting host metadata
+zabbix_agent_refreshactivechecks: 120                      # How often list of active checks is refreshed, in seconds
+zabbix_agent_buffer: 5                                     # Do not keep data longer then N seconds in buffer
+zabbix_agent_buffersize: 100                               # Maximum number of values in a memory buffer
+zabbix_agent_maxlinessecond: 20                            # Maximum number of new lines the agent will send per second to Zabbix Server or Proxy processing 'log' and 'logrt' active checks
+
+# Advanced parameters
+zabbix_agent_timeout: 3                                    # Spend no more than Timeout seconds on processing
+zabbix_agent_allowroot: 0                                  # Allow the agent to run as 'root' (0 - do not allow, 1 - allow)
+zabbix_agent_include:                                      # You may include individual files or all files in a directory in the configuration file
+  - "/etc/zabbix/zabbix_agentd.d/"
+
+
+# User parameters
+zabbix_agent_unsafe: 0                                     # Allow all characters to be passed in arguments to user-defined parameters
+zabbix_agent_userparameter: []                             # User-defined parameter to monitor. There can be several user-defined parameters.
+                                                           # You can add new lines same as zabbix_agent_include
+# Loadable modules
+zabbix_agent_loadmodulepath:                               # Set full path to location of agent modules
+zabbix_agent_modules: []                                   # Add one or more lines with modules module.so
+
+# TLS-related parameters
+zabbix_agent_tlsconnect: "unencrypted"                     # How the agent should connect to server or proxy
+zabbix_agent_tlsaccept: "unencrypted"                      # What incoming connections to accept. Multiple values can be specified, separated by comma.
+zabbix_agent_tlscafile:                                    # Full pathname of a file containing the top-level CA(s) certificates
+zabbix_agent_tlsscrlfile:                                  # Full pathname of a file containing revoked certificates
+zabbix_agent_tlscertissuer:                                # Allowed server certificate issuer
+zabbix_agent_tlscertsubject:                               # Allowed server certificate subject
+zabbix_agent_tlscertfile:                                  # Full pathname of a file containing the agent certificate or certificate chain
+zabbix_agent_tlskeyfile:                                   # Full pathname of a file containing the agent private key
+zabbix_agent_tlspskidentity:                               # Unique, case sensitive string used to identify the pre-shared key
+zabbix_agent_tlspskfile:                                   # Full pathname of a file containing the pre-shared key
+
+# Zabbix repository link
+#zabbix_repo: "http://repo.zabbix.com/zabbix/3.4/rhel/{{ ansible_distribution_major_version }}/{{ ansible_architecture }}/zabbix-release-3.4-2.el{{ ansible_distribution_major_version }}.noarch.rpm"

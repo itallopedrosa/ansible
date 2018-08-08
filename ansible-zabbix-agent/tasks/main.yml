@@ -1,0 +1,20 @@
+---
+- name: Copia o arquivo rpm
+  copy:
+     src: zabbix-agent-3.4.4-2.el7.x86_64.rpm
+     dest: /tmp/zabbix-agent-3.4.4-2.el7.x86_64.rpm
+     
+- name: Instala o pacote RPM.
+  yum:
+     name: /tmp/zabbix-agent-3.4.4-2.el7.x86_64.rpm
+     state: present
+     
+           
+- name: Copia o arquivo de configuração
+  template: src=zabbix_agentd.conf.j2 dest=/etc/zabbix/zabbix_agentd.conf owner=root group=root mode=0644 backup=yes
+  
+- name: Habilita e Inicia o Serviço
+  service: name=zabbix-agent state=started enabled=yes
+
+- name: Reinicia o Serviço
+  service: name=zabbix-agent state=restarted
