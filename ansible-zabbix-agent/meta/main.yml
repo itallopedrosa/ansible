@@ -1,0 +1,18 @@
+galaxy_info:
+  author: Vadim Kalsin
+  description: Ansible role for Zabbix 3.x on CentOS 7.x
+  company: Ukreximbank
+
+  license: BSD
+
+  min_ansible_version: 1.2
+
+  platforms:
+  - name: EL
+    versions:
+    - 7
+
+  galaxy_tags:
+    - monitoring
+
+dependencies: []

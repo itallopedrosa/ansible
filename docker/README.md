@@ -13,6 +13,8 @@ Including an example of how to use your role (for instance, with variables passe
     - hosts: docker
       roles:
          - { role: docker }
+		 
+		 comando: ansible-playbook playbook-docker.yml
 
 License
 -------
