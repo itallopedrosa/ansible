@@ -1,0 +1,36 @@
+# Arquivo de Configuração para Zabbix Agent - Padrão ANAC
+
+PidFile={{ zabbix_agent_pid }}
+
+# Arquivo de Log
+
+LogFile={{ zabbix_agent_log }}
+LogFileSize={{ zabbix_agent_logsize }}
+
+# Server Zabbix
+
+Server={{ zabbix_server_passive }}
+#Server
+{% if zabbix_server_active %}
+ServerActive={{ zabbix_server_active }}
+{% endif %}
+
+#Hostname
+
+{% if zabbix_agent_hostname %}
+Hostname={{ zabbix_agent_hostname }}
+{% else %}
+Hostname={{ansible_hostname}}
+{% endif %}
+
+
+#HostMetadataItem
+{% if zabbix_agent_hostmetaitem %}
+HostMetadataItem={{ zabbix_agent_hostmetaitem }}
+{% endif %}
+
+# Include=
+
+{% for line in zabbix_agent_include %}
+Include={{ line }}
+{% endfor %}

@@ -1,7 +1,7 @@
 ## Instalação NGINX
 
 - Requer Ansible 1.2 ou mais recente
-- Espera hosts do CentOS / RHEL 6.x ou Maior
+- Compativel com CentOS / RHEL 6.x ou Maior
 
 Estes playbooks implementa uma instalação muito básica do NGINX
 
