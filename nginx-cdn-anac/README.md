@@ -88,4 +88,4 @@ BSD
 Author Information
 -------
 
-[Itallo Pedrosa](http://nason.co) <br>
+[Itallo Pedrosa](http://github.com/itallopedrosa) <br>
