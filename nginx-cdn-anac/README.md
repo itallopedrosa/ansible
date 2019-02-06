@@ -9,7 +9,7 @@ Esta Role Ansible fornecerá uma nova instalação do servidor  Web Nginx no sis
 
 __1. &nbsp;&nbsp; Instalação de Dependencias:__ <br>
 
-> RedHat based distros (RHEL, CentOS, AL):
+> RedHat based distros (RHEL, CentOS):
 
 ```bash
 sudo yum -y install epel-release
