@@ -1,14 +1,13 @@
 # Ansible Nginx Role
 -------
 
-Esta Role Ansible fornecerá uma nova instalação do servidor da Web Nginx no sistema Operacional CentOS e fornecerá algumas ferramentas e atuará como CDN.
-
+Esta Role Ansible fornecerá uma nova instalação do servidor  Web Nginx no sistema Operacional CentOS e fornecerá algumas ferramentas e atuará como CDN.
 
 
 ## Pre-Requisitos
 -------
 
-__1. &nbsp;&nbsp; Install dependencies:__ <br>
+__1. &nbsp;&nbsp; Instalação de Dependencias:__ <br>
 
 > RedHat based distros (RHEL, CentOS, AL):
 
@@ -18,17 +17,6 @@ sudo yum clean all
 sudo yum -y install ansible
 ```
 
-
-__3. &nbsp;&nbsp; Create directory structure:__ <br>
-
-Create the directory structure that you are going to use. In this tutorial we are going to set up ansible roles in __/etc/ansible/roles__
-
-<br>
-
-```bash
-mkdir -p /etc/ansible/roles || exit 0
-```
-<br>
 
 __4. &nbsp;&nbsp; Set ansible host:__
 
@@ -42,7 +30,7 @@ echo localhost ansible_connection=local > /etc/ansible/hosts
 
 <br>
 
-## Role Variaveis
+## Variaveis
 -------
 
 Variaveis utilizadas na Role.
