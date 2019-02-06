@@ -4,13 +4,13 @@ proxy_cache_path {{path_to_cache}} levels=1:2 keys_zone=my_cache:10m max_size=10
 
 
 server {
-  server_name           {{site_name}};
+  server_name           {{ansible_nodename}};
   listen                {{http_port}};
   listen                {{https_port}} ssl;
 
   ssl                  on;
-  ssl_certificate      {{nginx_ssl_dir}}//{{site_name}}/{{site_name}}.cer;
-  ssl_certificate_key  {{nginx_ssl_dir}}/{{site_name}}/{{site_name}}.key;
+  ssl_certificate      {{nginx_ssl_dir}}//{{ansible_nodename}}/{{ansible_nodename}}.cer;
+  ssl_certificate_key  {{nginx_ssl_dir}}/{{ansible_nodename}}/{{ansible_nodename}}.key;
 
   add_header            Access-Control-Allow-Origin {{site_name}};
   index                 index.html index.htm index.php;
