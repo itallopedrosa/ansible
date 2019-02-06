@@ -29,7 +29,7 @@
     - nginx
 
 - name: criando nginx web diretorio
-  file: path=/var/www/html state=diretory owner=nginx group=nginx mode=0775 recurse=yes
+  file: path=/var/www/html state=directory owner=nginx group=nginx mode=0775 recurse=yes
 
 - name: configurando nginx
   template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf owner=nginx group=nginx mode=0644
@@ -40,7 +40,7 @@
   notify: restart nginx
 
 - name: configurando nginx site diretorio
-  file: path=/var/www/html/{{site_name}} state=diretorio owner=nginx group=nginx mode=0775 recurse=yes
+  file: path=/var/www/html/{{site_name}} state=directory owner=nginx group=nginx mode=0775 recurse=yes
 
 - name: configurando nginx site page
   template: src=nginx_site.conf.j2 dest=/etc/nginx/conf.d/{{site_name}}.conf owner=nginx group=nginx mode=0644
