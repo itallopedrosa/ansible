@@ -1,0 +1,65 @@
+---
+- name: adding CentOS6 nginx repo
+  when: ansible_os_family == "RedHat" and ansible_distribution_major_version|int == 6
+  yum_repository:
+    name: nginx
+    description: Offiical Nginx Repository for CentOS
+    baseurl: http://nginx.org/packages/centos/6/x86_64/
+    gpgcheck: no
+    enabled: yes
+
+- name: adding Amazon nginx repo
+  when: ansible_distribution == "Amazon"
+  yum_repository:
+    name: nginx
+    description: Offiical Nginx Repository for CentOS/Amazon
+    baseurl: http://nginx.org/packages/centos/6/x86_64/
+    gpgcheck: no
+    enabled: yes
+
+- name: adding CentOS7 nginx repo
+  when: ansible_os_family == "RedHat" and ansible_distribution_major_version|int == 7
+  yum_repository:
+    name: nginx
+    description: Offiical Nginx Repository for CentOS
+    baseurl: http://nginx.org/packages/centos/7/x86_64/
+    gpgcheck: no
+    enabled: yes
+
+- name: adding Debian nginx key
+  apt_key: url=http://nginx.org/keys/nginx_signing.key state=present
+  when: ansible_os_family == "Debian"
+
+- name: adding Debian nginx repo
+  apt_repository: repo='deb http://nginx.org/packages/debian/ jessie nginx' state=present
+  when: ansible_distribution == 'Debian' and ansible_distribution_release == 'jessie'
+
+- name: adding Ubuntu nginx repo
+  apt_repository: repo='deb http://nginx.org/packages/ubuntu/ trusty nginx' state=present
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'trusty'
+
+- name: installing nginx components
+  package: name={{item}} state=installed
+  with_items:
+    - nginx
+
+- name: checking nginx web directory 
+  file: path=/var/www/html state=directory owner=nginx group=nginx mode=0775 recurse=yes
+
+- name: configure nginx
+  template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf owner=nginx group=nginx mode=0644
+  notify: restart nginx
+
+- name: configure nginx status page
+  template: src=nginx_status.conf.j2 dest=/etc/nginx/conf.d/nginx_status.conf owner=nginx group=nginx mode=0644
+  notify: restart nginx
+
+- name: configure nginx site directory
+  file: path=/var/www/html/{{site_name}} state=directory owner=nginx group=nginx mode=0775 recurse=yes
+
+- name: configure nginx site page
+  template: src=nginx_site.conf.j2 dest=/etc/nginx/conf.d/{{site_name}}.conf owner=nginx group=nginx mode=0644
+  notify: restart nginx
+
+- name: starting nginx
+  service: name=nginx state=started enabled=yes

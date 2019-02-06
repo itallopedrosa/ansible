@@ -1,0 +1,27 @@
+---
+galaxy_info:
+  author: "Rich Nason"
+  description: "Role to install Nginx"
+  company: "Appcontainers"
+  license: "license (MIT, BSD)"
+  min_ansible_version: 2.0
+  platforms:
+    - name: EL
+      versions:
+        - 6
+        - 7
+    - name: Debian
+      versions:
+        - jessie
+    - name: Ubuntu
+      versions:
+        - trusty
+    - name: Amazon
+      versions:
+        - 2016.03
+  galaxy_tags:
+    - system
+    - services
+    - web
+    - web-server
+dependencies: []
