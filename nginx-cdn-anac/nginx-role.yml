@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: cdn
   become: true
   roles:
-    - clusterfrak.nginx
+    - nginx-cdn-anac
