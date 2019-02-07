@@ -1,15 +1,6 @@
 ---
-- name: adicionando CentOS6 nginx repo
-  when: ansible_os_family == "RedHat" and ansible_distribution_major_version|int == 6
-  yum_repository:
-    name: nginx
-    description: Offiical Nginx Repository for CentOS
-    baseurl: http://nginx.org/packages/centos/6/x86_64/
-    gpgcheck: no
-    enabled: yes
 
-
-- name: adicionando CentOS7 nginx repo
+- name: Adicionando repositorio NGINX CentOS7
   when: ansible_os_family == "RedHat" and ansible_distribution_major_version|int == 7
   yum_repository:
     name: nginx
@@ -18,33 +9,33 @@
     gpgcheck: no
     enabled: yes
 
-- name: instalando dependencias
+- name: Instalando dependencias
   package: name={{item}} state=installed
   with_items:
     - epel-release
 
-- name: instalando nginx components
+- name: Instalando nginx componentes
   package: name={{item}} state=installed
   with_items:
     - nginx
 
-- name: criando nginx web diretorio
+- name: Criando Diretorio Root da Aplicação
   file: path=/var/www/html state=directory owner=nginx group=nginx mode=0775 recurse=yes
 
-- name: configurando nginx
+- name: Configurando NGINX
   template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf owner=nginx group=nginx mode=0644
   notify: restart nginx
 
-- name: configurando nginx status page
+- name: Configurando pagina de status do servidor web.
   template: src=nginx_status.conf.j2 dest=/etc/nginx/conf.d/nginx_status.conf owner=nginx group=nginx mode=0644
   notify: restart nginx
 
-- name: configurando nginx site diretorio
+- name: Configurando Diretorio Root da Aplicação
   file: path=/var/www/html/{{site_name}} state=directory owner=nginx group=nginx mode=0775 recurse=yes
 
-- name: configurando nginx site page
+- name: Configuarando Pagina Inicial - Commons
   template: src=nginx_site.conf.j2 dest=/etc/nginx/conf.d/{{site_name}}.conf owner=nginx group=nginx mode=0644
   notify: restart nginx
 
-- name: iniciando serviço nginx
+- name: Iniciando serviço NGINX
   service: name=nginx state=started enabled=yes
