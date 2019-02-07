@@ -17,10 +17,10 @@ sudo yum clean all
 sudo yum -y install ansible
 ```
 
-## Variaveis
+## Variáveis
 -------
 
-Variaveis utilizadas na Role.
+Variáveis utilizadas na Role.
 
 <br>
 
