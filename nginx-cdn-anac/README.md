@@ -34,27 +34,13 @@ Variaveis utilizadas na Role.
 
 <br>
 
-> Opcional : Variaveis de Ambiente:
+> Variáveis:
 
- - HTTP_PORT - Port nginx will listen on for http connections [default:80]
- - HTTPS_PORT - Port nginx will listen on for https connections [default:443]
- - STATUS_PORT - Port nginx will use to serve web server stats [default:8080]
- - SITE_NAME - Site that nginx will set up a default server instance for [default:"ansible_nodename"]
- - SSL_DIR - Location that nginx will store any generated certificates [default:"/etc/nginx/ssl"]
-
-```
-
-
-This playbook will perform the following tasks:
-
- - If `SITE_NAME` has not been set, or is still set to nginx.local, then the reconfig playbook will simply generate a self signed certificate for the nginx.local domain and restart the nginx process, skipping all other major steps in the playbook.
- - If a certificate already exists for nginx.local, it will detect the existing cert and skip the cert generation step as well.
- - If `SITE_NAME` has been exported to a value other than nginx.local, then the playbook will use the value of `SITE_NAME`
- - The __/var/www/html/nginx.local__ directory will be renamed to __/var/www/html/mydomain.com__
- - The __/etc/nginx/conf.d/nginx.local.conf__ will be moved to __/etc/nginx/conf.d/mydomain.com.conf__
- - All paths, log names and references of nginx.local with be replaced with mydomain.com mydomain.com.conf file
- - A new self signed certificate key pair will be generated for mydomain.com and placed in __/etc/nginx/ssl__
-
+ - HTTP_PORT -  [default:80]
+ - HTTPS_PORT -  [default:443]
+ - STATUS_PORT - [default:8080]
+ - SITE_NAME - [default:"ansible_nodename"] - HOSTNAME DO SERVIDOR
+ - SSL_DIR - Local de armazenamento de certificador [default:"/etc/nginx/ssl"]
 
 
 License
