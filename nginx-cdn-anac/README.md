@@ -31,16 +31,9 @@ Variáveis utilizadas na Role.
  - status_port: 8080
  - site_name: "ansible_nodename"
  - nginx_ssl_dir: "/etc/ssl/certs/"
+ - path_to_cache: "/var/cache/nginx"
 
 <br>
-
-> Variáveis:
-
- - HTTP_PORT -  [default:80]
- - HTTPS_PORT -  [default:443]
- - STATUS_PORT - [default:8080]
- - SITE_NAME - [default:"ansible_nodename"] - HOSTNAME DO SERVIDOR
- - SSL_DIR - Local de armazenamento de certificador [default:"/etc/nginx/ssl"]
 
 
 License
