@@ -17,19 +17,6 @@ sudo yum clean all
 sudo yum -y install ansible
 ```
 
-
-__4. &nbsp;&nbsp; Set ansible host:__
-
-Set Ansible localhost entry so that ansible knows it will run against localhost and can talk to itself on localhost without attempting to open a TCP socket connection.
-
-<br>
-
-```bash
-echo localhost ansible_connection=local > /etc/ansible/hosts
-```
-
-<br>
-
 ## Variaveis
 -------
 
@@ -55,16 +42,6 @@ Variaveis utilizadas na Role.
  - SITE_NAME - Site that nginx will set up a default server instance for [default:"ansible_nodename"]
  - SSL_DIR - Location that nginx will store any generated certificates [default:"/etc/nginx/ssl"]
 
-<br>
-
- > Setando Variaveis de Ambiente:
-
- Para configurar variável de ambiente, execute o comando.
-
-<br>
-
-```bash
-export SITE_NAME="mydomain.com"
 ```
 
 
