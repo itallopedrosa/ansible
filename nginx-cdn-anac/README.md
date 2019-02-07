@@ -65,4 +65,4 @@ BSD
 Author Information
 -------
 
-[Itallo Pedrosa](http://github.com/itallopedrosa) <br>
+[Itallo Pedrosa](http://github.com/itallopedrosa)
