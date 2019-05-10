@@ -1,5 +1,6 @@
-# Execution
-# ansible-playbook mount.yml
+# Execucao
+# ansible-playbook umount.yml
+# Alterar para a estrutura dos servidores.
 
 - name: Test mount and unmounts
   hosts: localhost
