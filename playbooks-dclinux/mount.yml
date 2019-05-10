@@ -1,0 +1,16 @@
+# Execucao
+# ansible-playbook mount.yml
+
+- name: Teste Mount/Umount
+  hosts: localhost
+  remote_user: root
+
+  tasks:
+  - name: Mount
+    mount:
+        path: /media/arquivos/
+        src: /dev/mapper/arquivos-fileserver
+#        opts: bind
+        fstype: ext4
+        state: mounted
+

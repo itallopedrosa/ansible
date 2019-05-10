@@ -1,0 +1,18 @@
+# Execution
+# ansible-playbook mount.yml
+
+- name: Test mount and unmounts
+  hosts: localhost
+  remote_user: root
+
+  tasks:
+
+  - name: Unmount
+    mount:
+        path: "{{ item }}"
+        state: unmounted
+
+    with_items:
+       - /media/arquivos/
+       - /media/itallo/
+       - /media/sicoob/
