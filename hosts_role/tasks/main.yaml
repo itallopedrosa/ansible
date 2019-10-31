@@ -1,0 +1,8 @@
+---
+  
+- name: Criar entrada no /etc/hosts
+
+  lineinfile:
+    path: /etc/hosts
+    line: '{{ ansible_default_ipv4.address }}    {{ ansible_nodename }}   {{ ansible_nodename }}.mtur.gov.br'
+    insertbefore: BOF
