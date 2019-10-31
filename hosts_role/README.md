@@ -15,11 +15,10 @@ Variaveis obtidas atraves do comando ansible -m setup
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Comando para rodar o playbook. 
 
-    - hosts: servers
-      roles:
-         - hosts_role
+ansible-playbook hosts.yaml
+
 
 License
 -------
