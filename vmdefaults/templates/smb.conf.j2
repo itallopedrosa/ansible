@@ -1,0 +1,35 @@
+[global]
+server string = Servidor {{ ansible_hostname }}
+idmap gid = 10000-20000
+ntlm auth = no
+dns proxy = no
+netbios name = {{ ansible_hostname }}
+idmap uid = 10000-20000
+default = global
+workgroup = MTUR
+os level = 20
+printcap name = /etc/printcap
+security = ads
+lanman auth = no
+load printers = no
+smb ports = 445
+socket options = TCP_NODELAY SO_SNDBUF=8192 SO_RCVBUF=8192
+client ntlmv2 auth = yes
+wins server = 10.0.0.15
+domain master = no
+encrypt passwords = yes
+winbind use default domain = yes
+realm = MTUR.GOV.BR
+template shell = /bin/bash
+netbios aliases = {{ ansible_hostname }}
+server string = {{ ansible_hostname }}
+password server = *
+winbind enum users = no
+winbind enum groups = no
+template homedir = /home/%U
+winbind enum groups = no
+syslog = 0
+preferred master = no
+winbind cache time = 60
+unix charset = iso8859-1
+max smbd processes = 1000

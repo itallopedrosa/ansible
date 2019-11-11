@@ -1,0 +1,18 @@
+---
+- name: Instalar dependencias 
+  import_tasks: dep.yaml
+
+- name: Sincroniza Hora
+  import_tasks: ntpdate.yaml
+
+- name: Criar usuario Ansible 
+  import_tasks: createuser.yaml
+
+- name: Colocar servidor no dominio
+  import_tasks: domain.yaml
+
+- name: Alterar senha de root das maquinas
+  import_tasks: password.yaml
+
+- name: Configurar tarefas pos instalacao
+  import_tasks: posttasks.yaml

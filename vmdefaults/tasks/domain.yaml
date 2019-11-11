@@ -1,0 +1,73 @@
+---
+- name: Criar entrada no /etc/hosts
+  lineinfile:
+    path: /etc/hosts
+    line: '{{ ansible_default_ipv4.address }}   {{ ansible_nodename }}       {{ ansible_hostname }}'
+    insertbefore: EOF
+  
+- name: Configurar Samba
+  template:
+    src: "smb.conf.j2"
+    dest: "/etc/samba/smb.conf"
+
+- name: Configurar Kerberos
+  copy:
+    src: "files/krb5.conf"
+    dest: "/etc"
+
+- name: Configurar Keytab
+  copy:
+    src: "files/krb5.keytab"
+    dest: "/etc"
+
+- name: Criar ticket Kerberos
+  shell: kinit "{{ ad_username }}" < /etc/krb5.keytab
+
+- name: Adiciona servidor no dominio
+  shell: net ads join -U "{{ ad_username }}" < /etc/krb5.keytab
+
+- name: Copiar Nsswitch
+  copy:
+    src: files/nsswitch.conf
+    dest: /etc
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Copiar pam.d/login
+  copy:
+    src: files/login
+    dest: /etc/pam.d
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Copiar pam.d/system-auth
+  copy:
+    src: files/system-auth
+    dest: /etc/pam.d/system-auth-ac
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Copiar pam.d/sshd
+  copy:
+    src: files/sshd
+    dest: /etc/pam.d
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Copiar pam.d/passwd
+  copy:
+    src: files/passwd
+    dest: /etc/pam.d
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Restart Winbind
+  service:
+    name: winbind
+    state: restarted
+    enabled: yes

@@ -1,0 +1,23 @@
+---
+- name: Instalar pacotes basicos para autenticacao
+  yum:
+    name:
+      - epel-release
+      - python-devel
+      - pam_krb5
+      - krb5-server
+      - krb5-workstation
+      - samba-winbind
+      - python3-pip
+    state: present
+
+- name: Criar link simbolico
+  file:
+    src: /usr/bin/pip3
+    dest: /usr/bin/pip
+    state: link
+
+- name: Instala gerador de senha
+  pip:
+    name: passlib
+    state: present

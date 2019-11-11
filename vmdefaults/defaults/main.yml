@@ -1,0 +1,4 @@
+---
+ad_username: linux.ldap
+user_pass: $6$rounds=656000$ZY/.PTj6V5uWhhnE$Wu5IRF/YwRpjhOFF7vSzYCKi44vVaDi.Ac89RWQZZrLBheoUDhRJJhQ.W/tRca84dk/YzXQY.9G4E4.M40PVL1
+ntp_server: sturntp01

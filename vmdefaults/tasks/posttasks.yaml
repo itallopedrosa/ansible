@@ -1,0 +1,28 @@
+---
+- name: Copia Conf SSHD
+  copy:
+    src: files/sshd_config
+    dest: /etc/ssh
+    owner: root
+    group: root
+    mode: 0600
+  notify: restart ssh
+
+- name: Copia Banner
+  template:
+    src: "banner.j2"
+    dest: "/etc/ssh/banner"
+
+- name: Inclui entrada SSH
+  lineinfile:
+    dest=/etc/ssh/sshd_config
+    backup=True
+    backrefs=True
+    state=present
+    regexp='^(AllowGroups(?!.*\broot\b).*)$'
+    line='\1 ansible rede'
+
+- name: Reiniciar Serviço
+  service:
+    name: sshd
+    state: restarted

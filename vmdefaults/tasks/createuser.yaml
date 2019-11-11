@@ -1,0 +1,54 @@
+---
+- name: Cria grupo ansible
+  group:
+    name: ansible
+
+- name: Cria usuario local Ansible
+  user:
+    name: ansible
+    comment: Usuario Ansible
+    group: ansible
+    createhome: yes
+
+- name: Cria diretório .ssh
+  file: 
+    path: /home/ansible/.ssh
+    state: directory
+    owner: ansible
+    group: ansible
+    mode: 0700
+
+- name: Copia Skel 1
+  copy: 
+    src: files/skel/.bashrc
+    dest: /home/ansible
+    owner: ansible
+    group: ansible
+    mode: 0644
+
+- name: Copia Skel 2
+  copy: 
+    src: files/skel/.bash_profile
+    dest: /home/ansible
+    owner: ansible
+    group: ansible
+    mode: 0644
+
+- name: Copia Chave
+  copy: 
+    src: files/id_rsa.pub
+    dest: /home/ansible/.ssh/authorized_keys
+    owner: ansible
+    group: ansible
+    mode: 0600
+
+- name: Copia Sudoers
+  copy: 
+    src: files/sudoers
+    dest: /etc
+    owner: root
+    group: root
+    mode: 0440
+
+- name: Alterar Atributo (+)
+  command: chattr +i /etc/sudoers

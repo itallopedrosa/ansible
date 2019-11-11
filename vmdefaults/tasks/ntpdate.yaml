@@ -1,0 +1,8 @@
+---
+- name: Instala pacote ntpdate
+  yum:
+    name: ntpdate
+    state: present
+
+- name: Atualiza Hora do servidor
+  command: "ntpdate {{ ntp_server }}"

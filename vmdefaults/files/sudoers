@@ -1,0 +1,54 @@
+##                                                  ###
+## Template SUDO criado por Giuliano em 31/10/2019  ### 
+##                                                  ###
+#######################################################
+
+### VARIAVEIS
+Defaults    requiretty
+Defaults    editor=/usr/bin/vim, !env_editor
+Defaults    !visiblepw
+Defaults    always_set_home
+Defaults    env_reset
+Defaults    env_keep =  "COLORS DISPLAY HOSTNAME HISTSIZE INPUTRC KDEDIR LS_COLORS"
+Defaults    env_keep += "MAIL PS1 PS2 QTDIR USERNAME LANG LC_ADDRESS LC_CTYPE"
+Defaults    env_keep += "LC_COLLATE LC_IDENTIFICATION LC_MEASUREMENT LC_MESSAGES"
+Defaults    env_keep += "LC_MONETARY LC_NAME LC_NUMERIC LC_PAPER LC_TELEPHONE"
+Defaults    env_keep += "LC_TIME LC_ALL LANGUAGE LINGUAS _XKB_CHARSET XAUTHORITY"
+Defaults    secure_path = /sbin:/bin:/usr/sbin:/usr/bin
+Defaults    mail_always
+Defaults    mailto="itallo.pedrosa@turismo.gov.br"
+
+### ALIASES USERS
+User_Alias MONITOR = %central\ it
+User_Alias ADMINS = %Admins\ mtur
+User_Alias ANSIBLE = %ansible
+
+### ALIASES COMMANDS
+Cmnd_Alias NETWORKING = /sbin/route, /sbin/ifconfig, /bin/ping, /sbin/dhclient, /usr/bin/net, /sbin/iptables, /usr/bin/rfcomm, /usr/bin/wvdial, /sbin/iwconfig, /sbin/mii-tool
+Cmnd_Alias SOFTWARE = /bin/rpm, /usr/bin/up2date, /usr/bin/yum
+Cmnd_Alias SERVICES = /sbin/service, /sbin/chkconfig
+Cmnd_Alias LOCATE = /usr/bin/updatedb
+Cmnd_Alias STORAGE = /sbin/fdisk, /sbin/sfdisk, /sbin/parted, /sbin/partprobe, /bin/mount, /bin/umount, /bin/cat
+Cmnd_Alias DELEGATING =  /bin/chown, /bin/chmod, /bin/chgrp, /bin/mkdir 
+Cmnd_Alias PROCESSES = /bin/nice, /bin/kill, /usr/bin/kill, /usr/bin/killall
+Cmnd_Alias DRIVERS = /sbin/modprobe
+Cmnd_Alias DENIED = /bin/su, /usr/sbin/visudo, /usr/bin/passwd root, /sbin/shutdown -h now, /sbin/shutdown -r now, /sbin/halt, /sbin/reboot, /usr/bin/sudoedit
+Cmnd_Alias BLOCKED_RM = /bin/rm [-]* /etc/*, /bin/rm [-]* /etc*, /bin/rm /etc/*, /bin/rm [-]* /bin/*, /bin/rm [-]* /bin*, /bin/rm /bin/*,\
+			/bin/rm [-]* /boot/*, /bin/rm [-]* /boot*, /bin/rm /boot/*, /bin/rm [-]* /dev/*, /bin/rm [-]* /dev*, /bin/rm /dev/*,\
+			/bin/rm [-]* /lib/*, /bin/rm [-]* /lib*, /bin/rm /lib/*, /bin/rm [-]* /lib64/*, /bin/rm [-]* /lib64*, /bin/rm /lib64/*,\
+			/bin/rm [-]* /proc/*, /bin/rm [-]* /proc*, /bin/rm /proc/*, /bin/rm [-]* /sbin/*, /bin/rm [-]* /sbin*, /bin/rm /sbin/*,\
+			/bin/rm [-]* /sys/*, /bin/rm [-]* /sys*, /bin/rm /sys/*, /bin/rm [-]* /usr/*, /bin/rm [-]* /usr*, /bin/rm /usr/*,\
+			/bin/rm [-]* /var/*, /bin/rm [-]* /var*, /bin/rm /var/*
+Cmnd_Alias BLOCKED_MV = /bin/mv [-]* /etc/*, /bin/mv [-]* /etc*, /bin/mv /etc/*, /bin/mv [-]* /bin/*, /bin/mv [-]* /bin*, /bin/mv /bin/*,\
+			/bin/mv [-]* /boot/*, /bin/mv [-]* /boot*, /bin/mv /boot/*, /bin/mv [-]* /dev/*, /bin/mv [-]* /dev*, /bin/mv /dev/*,\
+			/bin/mv [-]* /lib/*, /bin/mv [-]* /lib*, /bin/mv /lib/*, /bin/mv [-]* /lib64/*, /bin/mv [-]* /lib64*, /bin/mv /lib64/*,\
+			/bin/mv [-]* /proc/*, /bin/mv [-]* /proc*, /bin/mv /proc/*, /bin/mv [-]* /sbin/*, /bin/mv [-]* /sbin*, /bin/mv /sbin/*,\
+			/bin/mv [-]* /sys/*, /bin/mv [-]* /sys*, /bin/mv /sys/*, /bin/mv [-]* /usr/*, /bin/mv [-]* /usr*, /bin/mv /usr/*,\
+			/bin/mv [-]* /var/*, /bin/mv [-]* /var*, /bin/mv /var/*
+			
+
+### SUDOERS
+root	ALL=(ALL) ALL
+ADMINS  ALL=(ALL) NOPASSWD:  ALL
+ANSIBLE ALL=(ALL) NOPASSWD:  ALL
+MONITOR ALL=(ALL) NOPASSWD:  NETWORKING, SOFTWARE, SERVICES, LOCATE, STORAGE, DELEGATING, PROCESSES, DRIVERS
