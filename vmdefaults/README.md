@@ -10,19 +10,20 @@ Role Variables
 --------------
 Variavies usadas.
 
-ad_username = variavel para inserir o nome do usuario que ira inserir os servidores no dominio.
-user_pass = senha do usuario (hash)
-ntp_server = servidor ntp
-domain_name = nome do dominio
+ad_username = variavel para inserir o nome do usuario que ira inserir os servidores no dominio;
+user_pass = senha do usuario (hash);
+ntp_server = servidor ntp;
+domain_name = nome do dominio;
 
 Example Playbook
 ----------------
 
 Playbook
 
-    - hosts: ansible
-       gather_facts: yes
-       become: true
+---
+- hosts: ansible
+  gather_facts: yes
+  become: true
   roles:
     - vmdefaults 
 
