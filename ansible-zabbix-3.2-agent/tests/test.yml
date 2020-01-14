@@ -1,0 +1,6 @@
+---
+- hosts: php
+  remote_user: root
+  become_user: centralit
+  roles:
+    - ansible-zabbix-3.2-agent

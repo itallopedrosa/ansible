@@ -1,0 +1,13 @@
+DirectoryIndex index.php index.html
+
+
+<VirtualHost *:80>
+  ServerName {{ teampass_server_name }}
+  DocumentRoot /var/www/html/teampass
+
+  <Directory "/var/www/html/teampass">
+    AllowOverride All
+    Options -Indexes +FollowSymLinks
+    Require all granted
+  </Directory>
+</VirtualHost>

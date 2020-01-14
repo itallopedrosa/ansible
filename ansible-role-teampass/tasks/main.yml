@@ -1,0 +1,100 @@
+---
+  # Title: tasks file for ansible-role-teampass
+  #
+  # Author: Itallo Pedrosa
+  # Version: 2.0
+  # File: tasks/main.yml
+  #
+  # Description:
+  #   Password server for teams
+
+  - name: "Instalando Pre Requisitos"
+    shell: wget -q https://packages.sury.org/php/apt.gpg -O- | apt-key add -
+
+  - name: "Instalando certificates"
+    shell: apt install ca-certificates apt-transport-https -y
+
+  - name: "Instalando repositorio php"
+    shell: echo "deb https://packages.sury.org/php/ stretch main" | tee /etc/apt/sources.list.d/php.list
+
+  - name: "Atualizando Sistema Operacional"
+    shell: apt update -y
+
+  - name: "Instalando pacotes"
+    apt:
+      name: "{{ item }}"
+      state: present
+      update_cache: yes
+    with_items:
+      - apache2
+      - git
+      - mcrypt
+      - openssl
+      - curl
+      - php7.1
+      - php7.1-cli
+      - php7.1-common
+      - php7.1-mysql
+      - php7.1-curl
+      - php7.1-mbstring
+      - php7.1-bcmath
+      - php7.1-iconv
+      - php7.1-gd
+      - php7.1-xml
+      - php7.1-ldap
+      - php7.1-mcrypt
+      - mysql-client
+
+  - name: "Download do codigo fonte do repositorio git"
+    git:
+      repo: https://github.com/nilsteampassnet/TeamPass.git
+      dest: /var/www/html/teampass
+      update: no
+
+  - name: "Setando permissoes no diretorio /var/www/html/teampass "
+    file:
+      path: /var/www/html/teampass
+      owner: www-data
+      group: www-data
+      recurse: yes
+
+  - name: "Criando diretorio /opt/teampass/saltkey para saltkey"
+    file:
+      path: /opt/teampass/saltkey
+      owner: www-data
+      group: www-data
+      mode: 755
+      recurse: yes
+
+  - name: "Alterando Parametro PHP max_execution_time = 30 to max_execution_time = 120"
+    replace:
+      path: /etc/php/7.1/apache2/php.ini
+      regexp: 'max_execution_time = 30'
+      replace: 'max_execution_time = 120'
+      backup: yes
+
+  - name: "Alterando Parametro PHP post_max_size = 8 to post_max_size = 32"
+    replace:
+      path: /etc/php/7.1/apache2/php.ini
+      regexp: 'post_max_size = 8M'
+      replace: 'post_max_size = 32M'
+      backup: yes
+
+
+  - name: "Alterando Parametro PHP upload_max_filesize = 2 to upload_max_filesize = 300"
+    replace:
+      path: /etc/php/7.1/apache2/php.ini
+      regexp: 'upload_max_filesize = 2M'
+      replace: 'upload_max_filesize = 300M'
+      backup: yes
+
+
+  - name: Teampass | Copia do arquivo apache vhost
+    action: template src=teampass.conf.j2 dest=/etc/apache2/sites-available/teampass.conf mode=644
+    notify:
+      - apache2_restart
+
+  - name: "Habilitando Virtual Host Apache2"
+    action: command a2ensite teampass creates=/etc/apache2/sites-enabled/teampass.conf
+    notify:
+      - apache2_restart
