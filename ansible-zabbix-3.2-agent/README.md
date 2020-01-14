@@ -23,19 +23,6 @@ zabbix_agent_server: localhost
 zabbix_agent_server_port: 10051
 ```
 
-How to Install
---------------
-
-```
-cd /etc/ansible/roles
-git clone https://github.com/varnav/ansible-zabbix-3.2-agent.git zabbix-agent 
-```
-
-or
-
-```
-cd /etc/ansible/roles
-ansible-galaxy install varnav.zabbix-3.2-agent
 ```
 
 
