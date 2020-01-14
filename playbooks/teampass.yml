@@ -1,0 +1,6 @@
+---
+# Playbook para instalação docker-ce. 
+
+- hosts: teampass
+  roles:
+    - ansible-role-teampass

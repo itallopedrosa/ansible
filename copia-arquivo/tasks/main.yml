@@ -1,0 +1,11 @@
+---
+# tasks file for copia-arquivo
+
+- name: Template do arquivo source list para servidores Debian 7 - MTUR
+  template:
+    src: sources.list.j2
+    dest: /etc/apt/sources.list
+    owner: root
+    group: root
+    mode: '0644'
+    backup: yes

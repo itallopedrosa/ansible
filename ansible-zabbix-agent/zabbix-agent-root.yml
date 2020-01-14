@@ -1,5 +1,5 @@
 ---
-- hosts: citsmart-prod
+- hosts: all
 
   roles:
     - ansible-zabbix-agent

@@ -1,0 +1,8 @@
+---
+# Playbook para instalação docker-ce. 
+
+- hosts: netbox
+
+
+  roles:
+    - docker

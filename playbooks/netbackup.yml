@@ -1,0 +1,8 @@
+---
+# Playbook para instalacao em massa do agente do netbackup em hosts linux debian-like. 
+
+- hosts: nbu
+
+
+  roles:
+    - netbackup

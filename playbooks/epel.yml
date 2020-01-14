@@ -1,0 +1,10 @@
+- hosts: citsmart
+#  become: yes
+#  become_method: sudo
+  tasks:
+  - name: Instalando Pacotes Basicos do SO
+    yum: name={{ item }} state=installed
+    with_items:
+      - epel-release
+      - vim-enhanced
+    tags: General_Packages

@@ -1,0 +1,8 @@
+---
+# Playbook para desativacao Selinux. 
+
+- hosts: citsmart
+
+
+  roles:
+    - ansible-centos-disable-selinux-master

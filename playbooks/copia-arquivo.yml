@@ -1,0 +1,5 @@
+---
+- hosts: tomcat-prod
+
+  roles:
+    - copia-arquivo

@@ -1,0 +1,5 @@
+---
+- hosts: citsmart
+
+  roles:
+    - ansible-zabbix-3.2-agent

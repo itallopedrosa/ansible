@@ -1,0 +1,17 @@
+---
+- hosts: jboss7-prod
+  tasks:
+    - name: install git package
+      apt:
+        name: git
+
+    - name: install git package
+      apt:
+        name: python
+
+    - name: Download de artefatos do repositorio GIT 
+      git: 
+        repo: "http://{{ gituser | urlencode }}:{{ gitpassword | urlencode }}@gitlab.turismo.gov.br/infra/mapa.git"
+        dest: /opt/java/deploy/mapa
+        version: deploy_2.0.29
+        force: yes
